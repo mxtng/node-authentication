@@ -17,11 +17,13 @@ passport.use(
         return done(null, false, { error: 'Invalid credentials.' });
       }
 
-      if (!user.validatePassword(password)) {
-        return done(null, false, { error: 'Invalid credentials.' });
-      }
+      user.validatePassword(password, function (err, isMatched) {
+        if (err) return done(err);
+        if (!isMatched)
+          return done(null, false, { error: 'Invalid credentials.' });
 
-      return done(null, user);
+        return done(null, user);
+      });
     });
   })
 );
