@@ -10,14 +10,14 @@ const userSchema = new Schema({
 
 // user password hashing
 userSchema.pre('save', function (next) {
-  let { password } = this;
+  const user = this;
 
   bcrypt.genSalt(10, function (err, salt) {
     if (err) return next(err);
 
-    bcrypt.hash(password, salt, function (err, hash) {
+    bcrypt.hash(user.password, salt, function (err, hash) {
       if (err) return next(err);
-      password = hash;
+      user.password = hash;
       next();
     });
   });
