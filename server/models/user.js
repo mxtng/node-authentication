@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
 const bcrypt = require('bcryptjs');
 
+// user schema
 const userSchema = new Schema({
   email: { type: String, lowercase: true, unique: true, required: true },
   password: { type: String, required: true },
 });
 
+// user password hashing
 userSchema.pre('save', function (next) {
   let { password } = this;
 
@@ -21,5 +22,13 @@ userSchema.pre('save', function (next) {
     });
   });
 });
+
+// user password validation
+userSchema.methods.validatePassword = function (userPassword, callback) {
+  bcrypt.compare(userPassword, this.password, function (err, isMatched) {
+    if (err) return callback(err);
+    callback(null, isMatched);
+  });
+};
 
 module.exports = mongoose.model('User', userSchema);
