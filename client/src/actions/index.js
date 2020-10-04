@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { REGISTER_USER, LOGIN_USER } from './types';
+import { REGISTER_USER, LOGIN_USER, LOGOUT_USER } from './types';
 
 export const userRegister = (formData, callback) => async (dispatch) => {
   try {
@@ -34,4 +34,13 @@ export const userLogin = (formData, callback) => async (dispatch) => {
   } catch (err) {
     console.error(err);
   }
+};
+
+export const userLogout = (callback) => (dispatch) => {
+  dispatch({
+    type: LOGOUT_USER,
+  });
+
+  localStorage.removeItem('token');
+  callback();
 };
