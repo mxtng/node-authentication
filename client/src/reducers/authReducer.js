@@ -1,7 +1,8 @@
 import { REGISTER_USER } from '../actions/types';
 
 const INITIAL_STATE = {
-  formData: {},
+  isAuthenticated: null,
+  token: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -9,7 +10,7 @@ export default (state = INITIAL_STATE, action) => {
 
   switch (type) {
     case REGISTER_USER:
-      return { ...state, formData: payload };
+      return { ...state, isAuthenticated: true, token: payload };
     default:
       return state;
   }
