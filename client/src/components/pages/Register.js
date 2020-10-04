@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { userRegister } from '../../actions/index';
 
 class Register extends Component {
   state = {
@@ -13,13 +15,13 @@ class Register extends Component {
 
   onSubmitClick = (e) => {
     e.preventDefault();
-    const { password, password2 } = this.state;
+    const { email, password, password2 } = this.state;
 
     if (password !== password2) {
       return console.log('Passwords do not match.');
     }
 
-    console.log(this.state);
+    this.props.userRegister({ email, password });
   };
 
   render() {
@@ -67,4 +69,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default connect(null, { userRegister })(Register);
