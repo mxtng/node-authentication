@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
+const privateKey = require('../config/keys').privateKey;
 
 // user registration route
 router.post('/', (req, res) => {
@@ -10,7 +12,10 @@ router.post('/', (req, res) => {
   user.save(function (err) {
     if (err) return res.status(400).send({ error: 'Registration failed.' });
 
-    return res.json('Registration success.');
+    jwt.sign(user.id, privateKey, function (err, token) {
+      if (err) return next(err);
+      return res.json({ token });
+    });
   });
 });
 
