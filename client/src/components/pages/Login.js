@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { userLogin } from '../../actions/index';
 
 class Login extends Component {
   state = {
@@ -12,7 +14,12 @@ class Login extends Component {
 
   onSubmitClick = (e) => {
     e.preventDefault();
-    console.log(this.state);
+
+    const { email, password } = this.state;
+
+    this.props.userLogin({ email, password }, () => {
+      this.props.history.push('/dashboard');
+    });
   };
 
   render() {
@@ -50,4 +57,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(null, { userLogin })(Login);
