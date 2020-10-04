@@ -21,7 +21,9 @@ class Register extends Component {
       return console.log('Passwords do not match.');
     }
 
-    this.props.userRegister({ email, password });
+    this.props.userRegister({ email, password }, () => {
+      this.props.history.push('/dashboard');
+    });
   };
 
   render() {
