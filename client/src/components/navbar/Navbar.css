@@ -1,0 +1,12 @@
+.nav {
+  border-bottom: 1px solid grey;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-item:hover {
+  color: skyblue;
+}

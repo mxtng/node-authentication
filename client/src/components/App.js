@@ -9,7 +9,7 @@ import Login from './pages/Login';
 
 const App = () => {
   return (
-    <div>
+    <div className="container">
       <BrowserRouter>
         <Navbar />
         <Route path='/' exact component={Root} />
