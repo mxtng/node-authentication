@@ -13,7 +13,11 @@ import Login from './pages/Login';
 
 // redux store setup
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+const store = createStore(
+  reducer,
+  { auth: { authenticated: localStorage.getItem('token') } },
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 const App = () => {
   return (
