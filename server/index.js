@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require('cors');
 const login = require('./routes/login');
 const register = require('./routes/register');
 const passport = require('passport');
@@ -19,6 +20,7 @@ mongoose
   .catch((err) => console.error(err));
 
 // app setup
+app.use(cors({ origin: 'http://localhost:3001' }));
 app.use(express.json());
 
 // app routes
