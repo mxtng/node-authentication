@@ -22,7 +22,6 @@ mongoose
 app.use(express.json());
 
 // app routes
-app.get('/', (req, res) => res.send('Root route'));
 app.use('/login', requireLogin, login);
 app.use('/register', register);
 
